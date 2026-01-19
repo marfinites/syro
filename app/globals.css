@@ -5,11 +5,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  --gold: #C9A962;
-  --dark-900: #121212;
-  --dark-800: #1a1a1a;
-  --dark-700: #222222;
-  --card-bg: #2a2a2a;
+  --color-background: 18, 18, 18;
+  --gradient-background: #121212;
+  --color-foreground: 245, 245, 245;
+  --color-background-contrast: 146, 146, 146;
+  --color-shadow: 18, 18, 18;
+  --color-button: 252, 228, 119;
+  --color-button-text: 245, 245, 245;
+  --color-secondary-button: 18, 18, 18;
+  --color-secondary-button-text: 245, 245, 245;
+  --color-link: 245, 245, 245;
+  --color-badge-foreground: 245, 245, 245;
+  --color-badge-background: 18, 18, 18;
+  --color-badge-border: 245, 245, 245;
+  --payment-terms-background-color: rgb(18, 18, 18);
+  --product-card-corner-radius: 1.6rem;
+  --gold: #fce477;
 }
 
 * {
@@ -24,8 +35,8 @@ html {
 }
 
 body {
-  background-color: var(--dark-900);
-  color: #ffffff;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -38,22 +49,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--dark-800);
+  background: rgb(var(--color-background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: rgb(var(--color-background-contrast));
   border-radius: 3px;
 }
 
-/* Product Card - Estilo Shopify */
+/* Product Card */
 .product-card {
-  background: var(--card-bg);
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-  transform: scale(1.02);
+  background: rgb(var(--color-background));
 }
 
 /* Cookie Banner */
@@ -62,8 +68,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #1a1a1a;
-  border-top: 1px solid #333;
+  background: rgb(var(--color-background));
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
   padding: 16px;
   z-index: 1000;
 }
@@ -73,8 +79,8 @@ body {
   position: fixed;
   bottom: 80px;
   right: 20px;
-  background: var(--gold);
-  color: #000;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-background));
   padding: 12px 20px;
   border-radius: 4px;
   font-weight: 500;
@@ -96,8 +102,8 @@ body {
 
 /* Button Gold */
 .btn-gold {
-  background: var(--gold);
-  color: #000;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-background));
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 2px;
@@ -108,14 +114,14 @@ body {
 }
 
 .btn-gold:hover {
-  background: #d4b56a;
+  opacity: 0.9;
 }
 
 /* Input Styles */
 .input-dark {
-  background-color: var(--dark-700);
-  border: 1px solid #333;
-  color: #fff;
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  color: rgb(var(--color-foreground));
   padding: 12px 16px;
   border-radius: 4px;
   transition: border-color 0.3s ease;
@@ -123,7 +129,7 @@ body {
 
 .input-dark:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: rgb(var(--color-button));
 }
 
 /* Cart Badge */
@@ -131,8 +137,8 @@ body {
   position: absolute;
   top: -6px;
   right: -6px;
-  background: var(--gold);
-  color: #000;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-background));
   font-size: 10px;
   font-weight: 700;
   width: 16px;
@@ -151,22 +157,10 @@ body {
   padding: 12px 16px;
   border-radius: 8px;
   transition: all 0.2s ease;
-  color: #999;
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .admin-link:hover, .admin-link.active {
-  background: var(--dark-700);
-  color: var(--gold);
-}
-
-/* Footer Image Overlay */
-.footer-overlay {
-  position: relative;
-}
-
-.footer-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+  background: rgba(var(--color-foreground), 0.05);
+  color: rgb(var(--color-button));
 }

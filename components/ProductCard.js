@@ -17,19 +17,21 @@ export default function ProductCard({ product }) {
     setTimeout(() => setShowToast(false), 2000)
   }
 
-  // Segunda imagem para hover (usa a mesma com filtro diferente se não houver)
   const hoverImage = product.hoverImage || product.image
 
   return (
     <>
       <Link href={`/product/${product.slug}`}>
         <div
-          className="product-card group rounded-lg overflow-hidden"
+          className="product-card group"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Image Container with neon effect */}
-          <div className="relative aspect-square bg-[#1a1a1a] overflow-hidden rounded-lg transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(201,169,98,0.4)]">
+          {/* Image Container - border radius 1.6rem, no border on hover */}
+          <div
+            className="relative aspect-square bg-[rgb(18,18,18)] overflow-hidden"
+            style={{ borderRadius: '1.6rem' }}
+          >
             {/* Main Image */}
             <Image
               src={product.image}
@@ -51,21 +53,22 @@ export default function ProductCard({ product }) {
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               style={{ filter: isHovered ? 'brightness(1.1) contrast(1.05)' : 'none' }}
             />
-
-            {/* Neon glow effect on hover */}
-            <div className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${
-              isHovered ? 'opacity-100' : 'opacity-0'
-            }`} style={{
-              boxShadow: 'inset 0 -40px 60px -20px rgba(201,169,98,0.3)'
-            }} />
           </div>
 
           {/* Info */}
-          <div className="p-3 bg-[#121212]">
-            <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-1">
+          <div className="pt-3 bg-[rgb(18,18,18)]">
+            {/* Product name - 13px, underline on hover */}
+            <p
+              className="uppercase tracking-wide mb-1 text-[rgba(245,245,245,0.75)] group-hover:underline"
+              style={{ fontSize: '13px' }}
+            >
               {product.name}
             </p>
-            <p className="text-[#C9A962] text-sm font-medium">
+            {/* Price - 24px */}
+            <p
+              className="text-[rgb(252,228,119)] font-medium"
+              style={{ fontSize: '24px' }}
+            >
               €{product.price.toFixed(2).replace('.', ',')} EUR
             </p>
           </div>
