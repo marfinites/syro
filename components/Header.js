@@ -21,7 +21,7 @@ export default function Header() {
               alt="SYRO"
               width={300}
               height={154}
-              className="w-auto h-[50px]"
+              className="w-auto h-[100px]"
               priority
             />
           </Link>

@@ -64,9 +64,9 @@ export default function ProductCard({ product }) {
             >
               {product.name}
             </p>
-            {/* Price - 24px */}
+            {/* Price - 24px, white */}
             <p
-              className="text-[rgb(252,228,119)] font-medium"
+              className="text-[rgb(245,245,245)] font-medium"
               style={{ fontSize: '24px' }}
             >
               €{product.price.toFixed(2).replace('.', ',')} EUR

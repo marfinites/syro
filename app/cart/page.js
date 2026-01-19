@@ -76,11 +76,11 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-3">
               {cart.map((item, index) => (
                 <div
-                  key={`${item.id}-${item.size}-${index}`}
-                  className="bg-[#1a1a1a] p-4 flex gap-4"
+                  key={`${item.id}-${item.size}-${item.color}-${index}`}
+                  className="bg-[rgb(26,26,26)] p-4 flex gap-4"
                 >
                   {/* Image */}
-                  <div className="relative w-20 h-20 flex-shrink-0 bg-[#2a2a2a] overflow-hidden">
+                  <div className="relative w-20 h-20 flex-shrink-0 bg-[rgb(42,42,42)] overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -91,32 +91,37 @@ export default function CartPage() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white text-sm font-medium truncate">
+                    <h3 className="text-[rgb(245,245,245)] text-sm font-medium truncate">
                       {item.name}
                     </h3>
                     {item.size && (
-                      <p className="text-gray-400 text-xs mt-1">
+                      <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">
                         Tamanho: {item.size}
                       </p>
                     )}
-                    <p className="text-[#C9A962] text-sm font-medium mt-1">
+                    {item.color && (
+                      <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">
+                        Cor: {item.color}
+                      </p>
+                    )}
+                    <p className="text-[rgb(245,245,245)] text-sm font-medium mt-1">
                       €{item.price.toFixed(2).replace('.', ',')}
                     </p>
 
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-2 mt-2">
                       <button
-                        onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
-                        className="w-6 h-6 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
+                        onClick={() => updateQuantity(item.id, item.size, item.color, item.quantity - 1)}
+                        className="w-6 h-6 bg-[rgb(42,42,42)] flex items-center justify-center text-[rgb(245,245,245)] hover:bg-[rgb(51,51,51)]"
                       >
                         <Minus size={12} />
                       </button>
-                      <span className="text-white text-sm w-6 text-center">
+                      <span className="text-[rgb(245,245,245)] text-sm w-6 text-center">
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                        className="w-6 h-6 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
+                        onClick={() => updateQuantity(item.id, item.size, item.color, item.quantity + 1)}
+                        className="w-6 h-6 bg-[rgb(42,42,42)] flex items-center justify-center text-[rgb(245,245,245)] hover:bg-[rgb(51,51,51)]"
                       >
                         <Plus size={12} />
                       </button>
@@ -125,8 +130,8 @@ export default function CartPage() {
 
                   {/* Remove Button */}
                   <button
-                    onClick={() => removeFromCart(item.id, item.size)}
-                    className="p-1 text-gray-400 hover:text-red-500 self-start"
+                    onClick={() => removeFromCart(item.id, item.size, item.color)}
+                    className="p-1 text-[rgba(245,245,245,0.4)] hover:text-red-500 self-start"
                   >
                     <Trash2 size={16} />
                   </button>
