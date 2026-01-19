@@ -1,6 +1,7 @@
 import './globals.css'
 import { CartProvider } from '@/components/CartContext'
 import { AuthProvider } from '@/components/AuthContext'
+import BackToTop from '@/components/BackToTop'
 
 export const metadata = {
   title: 'SYRO - Official Merchandise',
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <CartProvider>
             {children}
+            <BackToTop />
           </CartProvider>
         </AuthProvider>
       </body>
