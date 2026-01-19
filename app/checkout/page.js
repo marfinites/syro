@@ -13,7 +13,7 @@ import { useAuth } from '@/components/AuthContext'
 export default function CheckoutPage() {
   const router = useRouter()
   const { cart, cartTotal, clearCart, isLoaded } = useCart()
-  const { user, addOrder } = useAuth()
+  const { user, refreshOrders } = useAuth()
   const [loading, setLoading] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
   const [orderId, setOrderId] = useState(null)
@@ -48,7 +48,8 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           ...formData,
           items: cart,
-          total
+          total,
+          userId: user?.id || null
         })
       })
 
@@ -58,19 +59,18 @@ export default function CheckoutPage() {
         setOrderId(data.orderId)
         setOrderComplete(true)
 
-        // Add order to user's history
-        if (user) {
-          addOrder({
-            ...formData,
-            items: cart,
-            total
-          })
+        // Refresh orders in user's profile
+        if (user && refreshOrders) {
+          refreshOrders()
         }
 
         clearCart()
+      } else {
+        throw new Error(data.error || 'Erro desconhecido')
       }
     } catch (error) {
       alert('Erro ao processar encomenda. Tenta novamente.')
+      console.error('Checkout error:', error)
     } finally {
       setLoading(false)
     }

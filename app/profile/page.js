@@ -2,16 +2,17 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { User, Package, FileText, Mail, Settings, LogOut, ChevronRight, Download, Eye } from 'lucide-react'
+import { User, Package, FileText, Mail, Settings, LogOut, Download, Eye } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CookieBanner from '@/components/CookieBanner'
 import { useAuth } from '@/components/AuthContext'
 
 export default function ProfilePage() {
-  const { user, orders, isLoaded, register, login, logout, updateUser, toggleNewsletter } = useAuth()
+  const { user, orders, isLoaded, loading, register, login, logout, updateProfile, toggleNewsletter } = useAuth()
   const [activeTab, setActiveTab] = useState('orders')
   const [showLogin, setShowLogin] = useState(true)
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,6 +39,46 @@ export default function ProfilePage() {
     )
   }
 
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setError('')
+    const { user, error } = await login(formData.email, formData.password)
+    if (error) {
+      setError(error === 'Invalid login credentials' ? 'Email ou password incorretos' : error)
+    }
+  }
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    setError('')
+    const { user, error } = await register(formData.email, formData.password, {
+      name: formData.name,
+      phone: formData.phone,
+      newsletter: formData.newsletter
+    })
+    if (error) {
+      if (error.includes('already registered')) {
+        setError('Este email já está registado')
+      } else {
+        setError(error)
+      }
+    }
+  }
+
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault()
+    const { error } = await updateProfile({
+      name: formData.name || user.name,
+      phone: formData.phone || user.phone,
+      address: formData.address || user.address,
+      city: formData.city || user.city,
+      postal_code: formData.postalCode || user.postalCode
+    })
+    if (!error) {
+      setEditMode(false)
+    }
+  }
+
   // Not logged in - Show login/register form
   if (!user) {
     return (
@@ -55,15 +96,15 @@ export default function ProfilePage() {
             </div>
 
             <div className="bg-[rgb(26,26,26)] rounded-2xl p-8">
+              {error && (
+                <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+                  {error}
+                </div>
+              )}
+
               {showLogin ? (
                 // Login Form
-                <form onSubmit={(e) => {
-                  e.preventDefault()
-                  const result = login(formData.email, formData.password)
-                  if (!result) {
-                    alert('Conta não encontrada. Cria uma conta primeiro.')
-                  }
-                }}>
+                <form onSubmit={handleLogin}>
                   <div className="space-y-4">
                     <div>
                       <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Email</label>
@@ -85,23 +126,22 @@ export default function ProfilePage() {
                         className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
                         placeholder="••••••••"
                         required
+                        minLength={6}
                       />
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-6 hover:opacity-90 transition-opacity"
+                    disabled={loading}
+                    className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-6 hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
-                    Entrar
+                    {loading ? 'A entrar...' : 'Entrar'}
                   </button>
                 </form>
               ) : (
                 // Register Form
-                <form onSubmit={(e) => {
-                  e.preventDefault()
-                  register(formData)
-                }}>
+                <form onSubmit={handleRegister}>
                   <div className="space-y-4">
                     <div>
                       <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Nome Completo</label>
@@ -126,7 +166,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Password</label>
+                      <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Password (min. 6 caracteres)</label>
                       <input
                         type="password"
                         value={formData.password}
@@ -134,6 +174,7 @@ export default function ProfilePage() {
                         className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
                         placeholder="••••••••"
                         required
+                        minLength={6}
                       />
                     </div>
                     <div>
@@ -145,38 +186,6 @@ export default function ProfilePage() {
                         className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
                         placeholder="+351 912 345 678"
                       />
-                    </div>
-                    <div>
-                      <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Morada</label>
-                      <input
-                        type="text"
-                        value={formData.address}
-                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                        className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
-                        placeholder="Rua, número, andar"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Código Postal</label>
-                        <input
-                          type="text"
-                          value={formData.postalCode}
-                          onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                          className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
-                          placeholder="1000-000"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[rgba(245,245,245,0.6)] text-xs mb-2">Cidade</label>
-                        <input
-                          type="text"
-                          value={formData.city}
-                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                          className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
-                          placeholder="Lisboa"
-                        />
-                      </div>
                     </div>
                     <label className="flex items-center gap-3 cursor-pointer mt-2">
                       <input
@@ -191,15 +200,19 @@ export default function ProfilePage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-6 hover:opacity-90 transition-opacity"
+                    disabled={loading}
+                    className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-6 hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
-                    Criar Conta
+                    {loading ? 'A criar conta...' : 'Criar Conta'}
                   </button>
                 </form>
               )}
 
               <button
-                onClick={() => setShowLogin(!showLogin)}
+                onClick={() => {
+                  setShowLogin(!showLogin)
+                  setError('')
+                }}
                 className="w-full text-center text-[rgba(245,245,245,0.5)] text-sm mt-6 hover:text-[rgb(245,245,245)] transition-colors"
               >
                 {showLogin ? 'Não tens conta? Criar conta' : 'Já tens conta? Entrar'}
@@ -234,7 +247,7 @@ export default function ProfilePage() {
                 <User size={28} className="text-[rgba(245,245,245,0.5)]" />
               </div>
               <div>
-                <h1 className="text-xl font-medium text-[rgb(245,245,245)]">{user.name}</h1>
+                <h1 className="text-xl font-medium text-[rgb(245,245,245)]">{user.name || 'Utilizador'}</h1>
                 <p className="text-[rgba(245,245,245,0.5)] text-sm">{user.email}</p>
               </div>
             </div>
@@ -292,9 +305,9 @@ export default function ProfilePage() {
                         <div key={order.id} className="bg-[rgb(26,26,26)] rounded-2xl p-5">
                           <div className="flex items-center justify-between mb-4">
                             <div>
-                              <p className="text-[rgb(245,245,245)] font-medium">{order.id}</p>
+                              <p className="text-[rgb(245,245,245)] font-medium">{order.order_number}</p>
                               <p className="text-[rgba(245,245,245,0.4)] text-xs mt-1">
-                                {new Date(order.createdAt).toLocaleDateString('pt-PT')}
+                                {new Date(order.created_at).toLocaleDateString('pt-PT')}
                               </p>
                             </div>
                             <span className={`px-3 py-1 rounded-full text-xs ${
@@ -308,10 +321,10 @@ export default function ProfilePage() {
                           </div>
                           <div className="flex items-center justify-between pt-4 border-t border-[rgba(245,245,245,0.1)]">
                             <p className="text-[rgba(245,245,245,0.6)] text-sm">
-                              {order.items?.length || 0} artigo(s)
+                              {order.order_items?.length || 0} artigo(s)
                             </p>
                             <p className="text-[rgb(245,245,245)] font-medium">
-                              €{order.total?.toFixed(2).replace('.', ',') || '0,00'}
+                              €{parseFloat(order.total).toFixed(2).replace('.', ',')}
                             </p>
                           </div>
                         </div>
@@ -340,9 +353,9 @@ export default function ProfilePage() {
                               <FileText size={18} className="text-[rgba(245,245,245,0.5)]" />
                             </div>
                             <div>
-                              <p className="text-[rgb(245,245,245)] text-sm font-medium">Fatura {order.id}</p>
+                              <p className="text-[rgb(245,245,245)] text-sm font-medium">Fatura {order.order_number}</p>
                               <p className="text-[rgba(245,245,245,0.4)] text-xs mt-1">
-                                {new Date(order.createdAt).toLocaleDateString('pt-PT')}
+                                {new Date(order.created_at).toLocaleDateString('pt-PT')}
                               </p>
                             </div>
                           </div>
@@ -383,6 +396,7 @@ export default function ProfilePage() {
                           </span>
                           <button
                             onClick={toggleNewsletter}
+                            disabled={loading}
                             className={`relative w-12 h-6 rounded-full transition-colors ${
                               user.newsletter ? 'bg-[rgb(245,245,245)]' : 'bg-[rgb(36,36,36)]'
                             }`}
@@ -414,17 +428,7 @@ export default function ProfilePage() {
                   </div>
 
                   <div className="bg-[rgb(26,26,26)] rounded-2xl p-8">
-                    <form onSubmit={(e) => {
-                      e.preventDefault()
-                      updateUser({
-                        name: formData.name || user.name,
-                        phone: formData.phone || user.phone,
-                        address: formData.address || user.address,
-                        postalCode: formData.postalCode || user.postalCode,
-                        city: formData.city || user.city
-                      })
-                      setEditMode(false)
-                    }}>
+                    <form onSubmit={handleUpdateProfile}>
                       <div className="space-y-5">
                         <div>
                           <label className="block text-[rgba(245,245,245,0.4)] text-xs mb-2">Nome</label>
@@ -436,7 +440,7 @@ export default function ProfilePage() {
                               className="w-full bg-[rgb(36,36,36)] text-[rgb(245,245,245)] px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[rgba(245,245,245,0.3)]"
                             />
                           ) : (
-                            <p className="text-[rgb(245,245,245)]">{user.name}</p>
+                            <p className="text-[rgb(245,245,245)]">{user.name || '-'}</p>
                           )}
                         </div>
 
@@ -456,7 +460,7 @@ export default function ProfilePage() {
                               placeholder="+351 912 345 678"
                             />
                           ) : (
-                            <p className="text-[rgb(245,245,245)]">{user.phone || '—'}</p>
+                            <p className="text-[rgb(245,245,245)]">{user.phone || '-'}</p>
                           )}
                         </div>
 
@@ -471,7 +475,7 @@ export default function ProfilePage() {
                               placeholder="Rua, número, andar"
                             />
                           ) : (
-                            <p className="text-[rgb(245,245,245)]">{user.address || '—'}</p>
+                            <p className="text-[rgb(245,245,245)]">{user.address || '-'}</p>
                           )}
                         </div>
 
@@ -487,7 +491,7 @@ export default function ProfilePage() {
                                 placeholder="1000-000"
                               />
                             ) : (
-                              <p className="text-[rgb(245,245,245)]">{user.postalCode || '—'}</p>
+                              <p className="text-[rgb(245,245,245)]">{user.postalCode || '-'}</p>
                             )}
                           </div>
                           <div>
@@ -501,7 +505,7 @@ export default function ProfilePage() {
                                 placeholder="Lisboa"
                               />
                             ) : (
-                              <p className="text-[rgb(245,245,245)]">{user.city || '—'}</p>
+                              <p className="text-[rgb(245,245,245)]">{user.city || '-'}</p>
                             )}
                           </div>
                         </div>
@@ -509,9 +513,10 @@ export default function ProfilePage() {
                         {editMode && (
                           <button
                             type="submit"
-                            className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-4 hover:opacity-90 transition-opacity"
+                            disabled={loading}
+                            className="w-full bg-[rgb(245,245,245)] text-[rgb(18,18,18)] py-4 rounded-xl font-medium text-sm mt-4 hover:opacity-90 transition-opacity disabled:opacity-50"
                           >
-                            Guardar Alterações
+                            {loading ? 'A guardar...' : 'Guardar Alterações'}
                           </button>
                         )}
                       </div>
