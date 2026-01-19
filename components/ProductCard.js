@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingBag } from 'lucide-react'
 import { useCart } from './CartContext'
 import { useState } from 'react'
 
@@ -20,43 +19,25 @@ export default function ProductCard({ product }) {
   return (
     <>
       <Link href={`/product/${product.slug}`}>
-        <div className="product-card bg-dark-800 rounded-lg overflow-hidden group">
+        <div className="product-card group">
           {/* Image */}
-          <div className="relative aspect-square bg-dark-700 overflow-hidden">
+          <div className="relative aspect-square bg-[#2a2a2a] overflow-hidden">
             <Image
               src={product.image}
               alt={product.name}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              className="object-cover"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
-
-            {/* Quick Add Button */}
-            <button
-              onClick={handleAddToCart}
-              className="absolute bottom-4 right-4 p-3 bg-gold text-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110"
-            >
-              <ShoppingBag size={18} />
-            </button>
-
-            {/* Badge */}
-            {product.badge && (
-              <span className="absolute top-4 left-4 px-3 py-1 bg-gold text-black text-xs font-semibold rounded">
-                {product.badge}
-              </span>
-            )}
           </div>
 
           {/* Info */}
-          <div className="p-4">
-            <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">
-              {product.category}
-            </p>
-            <h3 className="text-white font-medium mb-2 group-hover:text-gold transition-colors">
+          <div className="p-3 bg-[#121212]">
+            <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-1">
               {product.name}
-            </h3>
-            <p className="text-gold font-semibold">
-              €{product.price.toFixed(2)}
+            </p>
+            <p className="text-[#C9A962] text-sm font-medium">
+              €{product.price.toFixed(2).replace('.', ',')} EUR
             </p>
           </div>
         </div>

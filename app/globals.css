@@ -6,13 +6,16 @@
 
 :root {
   --gold: #C9A962;
-  --dark-900: #0a0a0a;
-  --dark-800: #121212;
-  --dark-700: #1a1a1a;
+  --dark-900: #121212;
+  --dark-800: #1a1a1a;
+  --dark-700: #222222;
+  --card-bg: #2a2a2a;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -23,7 +26,7 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,33 +34,73 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 4px;
+  background: #444;
+  border-radius: 3px;
 }
 
-/* Product Card Hover */
+/* Product Card - Estilo Shopify */
 .product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg);
+  transition: transform 0.3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 40px rgba(201, 169, 98, 0.1);
+  transform: scale(1.02);
 }
 
-/* Button Styles */
+/* Cookie Banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+  padding: 16px;
+  z-index: 1000;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: var(--gold);
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  animation: slideIn 0.3s ease;
+  z-index: 1000;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Button Gold */
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold) 0%, #a8893d 100%);
+  background: var(--gold);
   color: #000;
   font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
 }
 
 .btn-gold:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.4);
+  background: #d4b56a;
 }
 
 /* Input Styles */
@@ -78,14 +121,14 @@ body {
 /* Cart Badge */
 .cart-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -6px;
+  right: -6px;
   background: var(--gold);
   color: #000;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -108,27 +151,14 @@ body {
   color: var(--gold);
 }
 
-/* Toast Notification */
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--gold);
-  color: #000;
-  padding: 16px 24px;
-  border-radius: 8px;
-  font-weight: 500;
-  animation: slideIn 0.3s ease;
-  z-index: 1000;
+/* Footer Image Overlay */
+.footer-overlay {
+  position: relative;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.footer-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
 }

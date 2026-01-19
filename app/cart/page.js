@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import CookieBanner from '@/components/CookieBanner'
 import { useCart } from '@/components/CartContext'
 
 export default function CartPage() {
@@ -13,9 +14,9 @@ export default function CartPage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen pt-24 px-4">
+        <main className="min-h-screen pt-12 px-4 bg-[#121212]">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-400">A carregar...</p>
+            <p className="text-gray-400 text-sm">A carregar...</p>
           </div>
         </main>
         <Footer />
@@ -27,55 +28,59 @@ export default function CartPage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen pt-24 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="w-24 h-24 bg-dark-800 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag size={40} className="text-gray-600" />
+        <main className="min-h-screen pt-12 px-4 bg-[#121212]">
+          <div className="max-w-4xl mx-auto text-center py-16">
+            <div className="w-16 h-16 bg-[#2a2a2a] rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShoppingBag size={24} className="text-gray-500" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-4">
+            <h1 className="text-lg text-white mb-2">
               O teu carrinho está vazio
             </h1>
-            <p className="text-gray-400 mb-8">
-              Explora a nossa coleção e adiciona produtos ao teu carrinho.
+            <p className="text-gray-400 text-sm mb-6">
+              Explora a nossa coleção e adiciona produtos.
             </p>
             <Link href="/" className="btn-gold inline-block">
-              EXPLORAR PRODUTOS
+              VER PRODUTOS
             </Link>
           </div>
         </main>
         <Footer />
+        <CookieBanner />
       </>
     )
   }
+
+  const shippingCost = cartTotal >= 50 ? 0 : 4.99
+  const total = cartTotal + shippingCost
 
   return (
     <>
       <Header />
 
-      <main className="min-h-screen pt-24 pb-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <main className="min-h-screen bg-[#121212] py-8">
+        <div className="max-w-4xl mx-auto px-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-gold mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-[#C9A962] mb-6 text-sm"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={16} />
             Continuar a comprar
           </Link>
 
-          <h1 className="text-3xl font-bold text-white mb-8">
-            CARRINHO <span className="text-gold">({cart.length})</span>
+          <h1 className="text-xl font-medium text-white mb-6">
+            Carrinho ({cart.length})
           </h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-3">
               {cart.map((item, index) => (
                 <div
                   key={`${item.id}-${item.size}-${index}`}
-                  className="bg-dark-800 rounded-lg p-4 flex gap-4"
+                  className="bg-[#1a1a1a] p-4 flex gap-4"
                 >
                   {/* Image */}
-                  <div className="relative w-24 h-24 flex-shrink-0 bg-dark-700 rounded-lg overflow-hidden">
+                  <div className="relative w-20 h-20 flex-shrink-0 bg-[#2a2a2a] overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -86,34 +91,34 @@ export default function CartPage() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-medium truncate">
+                    <h3 className="text-white text-sm font-medium truncate">
                       {item.name}
                     </h3>
                     {item.size && (
-                      <p className="text-gray-400 text-sm">
+                      <p className="text-gray-400 text-xs mt-1">
                         Tamanho: {item.size}
                       </p>
                     )}
-                    <p className="text-gold font-semibold mt-1">
-                      €{item.price.toFixed(2)}
+                    <p className="text-[#C9A962] text-sm font-medium mt-1">
+                      €{item.price.toFixed(2).replace('.', ',')}
                     </p>
 
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-3 mt-3">
+                    <div className="flex items-center gap-2 mt-2">
                       <button
                         onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
-                        className="w-8 h-8 bg-dark-700 rounded flex items-center justify-center text-white hover:bg-dark-600 transition-colors"
+                        className="w-6 h-6 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
                       >
-                        <Minus size={14} />
+                        <Minus size={12} />
                       </button>
-                      <span className="text-white w-6 text-center">
+                      <span className="text-white text-sm w-6 text-center">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                        className="w-8 h-8 bg-dark-700 rounded flex items-center justify-center text-white hover:bg-dark-600 transition-colors"
+                        className="w-6 h-6 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
                       >
-                        <Plus size={14} />
+                        <Plus size={12} />
                       </button>
                     </div>
                   </div>
@@ -121,39 +126,39 @@ export default function CartPage() {
                   {/* Remove Button */}
                   <button
                     onClick={() => removeFromCart(item.id, item.size)}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors self-start"
+                    className="p-1 text-gray-400 hover:text-red-500 self-start"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={16} />
                   </button>
                 </div>
               ))}
             </div>
 
             {/* Order Summary */}
-            <div className="bg-dark-800 rounded-lg p-6 h-fit">
-              <h2 className="text-xl font-bold text-white mb-6">Resumo</h2>
+            <div className="bg-[#1a1a1a] p-5 h-fit">
+              <h2 className="text-white font-medium mb-4">Resumo</h2>
 
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2 text-sm mb-4">
                 <div className="flex justify-between text-gray-400">
                   <span>Subtotal</span>
-                  <span>€{cartTotal.toFixed(2)}</span>
+                  <span>€{cartTotal.toFixed(2).replace('.', ',')}</span>
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>Envio</span>
-                  <span>{cartTotal >= 50 ? 'Grátis' : '€4.99'}</span>
+                  <span>{shippingCost === 0 ? 'Grátis' : `€${shippingCost.toFixed(2).replace('.', ',')}`}</span>
                 </div>
               </div>
 
-              <div className="border-t border-dark-700 pt-4 mb-6">
-                <div className="flex justify-between text-white font-bold text-lg">
+              <div className="border-t border-[#333] pt-4 mb-4">
+                <div className="flex justify-between text-white font-medium">
                   <span>Total</span>
-                  <span className="text-gold">
-                    €{(cartTotal + (cartTotal >= 50 ? 0 : 4.99)).toFixed(2)}
+                  <span className="text-[#C9A962]">
+                    €{total.toFixed(2).replace('.', ',')} EUR
                   </span>
                 </div>
                 {cartTotal < 50 && (
-                  <p className="text-gray-400 text-xs mt-2">
-                    Faltam €{(50 - cartTotal).toFixed(2)} para envio grátis
+                  <p className="text-gray-500 text-xs mt-2">
+                    Faltam €{(50 - cartTotal).toFixed(2).replace('.', ',')} para envio grátis
                   </p>
                 )}
               </div>
@@ -164,16 +169,13 @@ export default function CartPage() {
               >
                 FINALIZAR COMPRA
               </Link>
-
-              <p className="text-gray-500 text-xs text-center mt-4">
-                Pagamento seguro com encriptação SSL
-              </p>
             </div>
           </div>
         </div>
       </main>
 
       <Footer />
+      <CookieBanner />
     </>
   )
 }

@@ -2,8 +2,8 @@ import './globals.css'
 import { CartProvider } from '@/components/CartContext'
 
 export const metadata = {
-  title: 'SYRO Merch - Official Merchandise',
-  description: 'Official Syro merch featuring exclusive t-shirts, pins and accessories',
+  title: 'SYRO - Official Merchandise',
+  description: 'Merch Oficial SYRO. T-shirts exclusivas, pins e acessórios.',
 }
 
 export default function RootLayout({ children }) {

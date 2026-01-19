@@ -3,9 +3,10 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { ArrowLeft, Minus, Plus, ShoppingBag, Truck, Shield, RotateCcw } from 'lucide-react'
+import { ArrowLeft, Minus, Plus } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import CookieBanner from '@/components/CookieBanner'
 import { useCart } from '@/components/CartContext'
 import { getProductBySlug, products } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
@@ -23,10 +24,10 @@ export default function ProductPage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen pt-24 px-4">
-          <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-2xl text-white mb-4">Produto não encontrado</h1>
-            <Link href="/" className="text-gold hover:underline">
+        <main className="min-h-screen pt-12 px-4 bg-[#121212]">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-xl text-white mb-4">Produto não encontrado</h1>
+            <Link href="/" className="text-[#C9A962] hover:underline text-sm">
               Voltar à loja
             </Link>
           </div>
@@ -54,20 +55,20 @@ export default function ProductPage() {
     <>
       <Header />
 
-      <main className="min-h-screen pt-24 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <main className="min-h-screen bg-[#121212] py-8">
+        <div className="max-w-6xl mx-auto px-4">
           {/* Breadcrumb */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-gold mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-[#C9A962] mb-6 text-sm"
           >
-            <ArrowLeft size={18} />
-            Voltar à loja
+            <ArrowLeft size={16} />
+            Voltar
           </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Product Image */}
-            <div className="relative aspect-square bg-dark-800 rounded-lg overflow-hidden">
+            <div className="relative aspect-square bg-[#2a2a2a] rounded overflow-hidden">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -75,42 +76,34 @@ export default function ProductPage() {
                 className="object-cover"
                 priority
               />
-              {product.badge && (
-                <span className="absolute top-4 left-4 px-4 py-2 bg-gold text-black text-sm font-semibold rounded">
-                  {product.badge}
-                </span>
-              )}
             </div>
 
             {/* Product Info */}
             <div className="flex flex-col">
-              <p className="text-gold text-sm uppercase tracking-wider mb-2">
-                {product.category}
-              </p>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h1 className="text-2xl font-medium text-white mb-2">
                 {product.name}
               </h1>
-              <p className="text-3xl text-gold font-bold mb-6">
-                €{product.price.toFixed(2)}
+              <p className="text-2xl text-[#C9A962] font-medium mb-6">
+                €{product.price.toFixed(2).replace('.', ',')} EUR
               </p>
 
-              <p className="text-gray-400 leading-relaxed mb-8">
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
                 {product.description}
               </p>
 
               {/* Size Selector */}
               {product.sizes && (
                 <div className="mb-6">
-                  <p className="text-white font-medium mb-3">Tamanho</p>
-                  <div className="flex gap-3">
+                  <p className="text-white text-sm mb-2">Tamanho</p>
+                  <div className="flex gap-2">
                     {product.sizes.map(size => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`w-12 h-12 rounded-lg font-medium transition-all ${
+                        className={`w-10 h-10 text-sm font-medium transition-all ${
                           selectedSize === size
-                            ? 'bg-gold text-black'
-                            : 'bg-dark-700 text-white hover:bg-dark-600'
+                            ? 'bg-[#C9A962] text-black'
+                            : 'bg-[#2a2a2a] text-white hover:bg-[#333]'
                         }`}
                       >
                         {size}
@@ -121,23 +114,23 @@ export default function ProductPage() {
               )}
 
               {/* Quantity Selector */}
-              <div className="mb-8">
-                <p className="text-white font-medium mb-3">Quantidade</p>
-                <div className="flex items-center gap-4">
+              <div className="mb-6">
+                <p className="text-white text-sm mb-2">Quantidade</p>
+                <div className="flex items-center gap-3">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 bg-dark-700 rounded-lg flex items-center justify-center text-white hover:bg-dark-600 transition-colors"
+                    className="w-8 h-8 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
                   >
-                    <Minus size={18} />
+                    <Minus size={14} />
                   </button>
-                  <span className="text-white font-medium text-lg w-8 text-center">
+                  <span className="text-white w-8 text-center">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 bg-dark-700 rounded-lg flex items-center justify-center text-white hover:bg-dark-600 transition-colors"
+                    className="w-8 h-8 bg-[#2a2a2a] flex items-center justify-center text-white hover:bg-[#333]"
                   >
-                    <Plus size={18} />
+                    <Plus size={14} />
                   </button>
                 </div>
               </div>
@@ -145,39 +138,27 @@ export default function ProductPage() {
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="btn-gold flex items-center justify-center gap-3 w-full py-4"
+                className="btn-gold w-full py-3"
               >
-                <ShoppingBag size={20} />
                 ADICIONAR AO CARRINHO
               </button>
 
-              {/* Features */}
-              <div className="mt-8 pt-8 border-t border-dark-700">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="flex items-center gap-3 text-gray-400">
-                    <Truck size={20} className="text-gold" />
-                    <span className="text-sm">Envio 24-48h</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-400">
-                    <Shield size={20} className="text-gold" />
-                    <span className="text-sm">Pagamento seguro</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-400">
-                    <RotateCcw size={20} className="text-gold" />
-                    <span className="text-sm">Trocas grátis</span>
-                  </div>
-                </div>
+              {/* Info */}
+              <div className="mt-6 pt-6 border-t border-[#333] text-xs text-gray-400 space-y-2">
+                <p>• Envio em 24-48h para Portugal</p>
+                <p>• Pagamento seguro</p>
+                <p>• Trocas e devoluções grátis</p>
               </div>
             </div>
           </div>
 
           {/* Related Products */}
           {relatedProducts.length > 0 && (
-            <section className="mt-20">
-              <h2 className="text-2xl font-bold text-white mb-8">
+            <section className="mt-16">
+              <h2 className="text-lg font-medium text-white mb-6">
                 Produtos Relacionados
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {relatedProducts.map(p => (
                   <ProductCard key={p.id} product={p} />
                 ))}
@@ -188,6 +169,7 @@ export default function ProductPage() {
       </main>
 
       <Footer />
+      <CookieBanner />
 
       {/* Toast */}
       {showToast && (
