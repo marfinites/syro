@@ -62,7 +62,7 @@ export default function BiographyPage() {
             <div className="space-y-12 text-[rgba(245,245,245,0.8)] leading-[1.9]" style={{ fontSize: '17px' }}>
               <p>
                 Há quem nasça com o ritmo no sangue. <span className="text-[rgb(245,245,245)]">Diogo Lopes</span> nasceu com ele nas mãos.
-                Aos doze anos, num canto qualquer do Barreiro, descobriu que a bateria era mais do que um instrumento —
+                Aos doze anos, num canto qualquer do Barreiro, descobriu que a bateria era mais do que um instrumento,
                 era uma linguagem, uma forma de traduzir o que as palavras não conseguiam dizer.
               </p>
 
@@ -79,7 +79,7 @@ export default function BiographyPage() {
               <p>
                 Formado em Jazz e Música Moderna, carrega consigo a sofisticação de quem estudou os mestres
                 e a rebeldia de quem escolheu criar o seu próprio caminho. Com os <em>Caelum</em>, aprendeu o peso
-                de uma banda, a força do coletivo. Mas havia algo dentro dele que pedia espaço — uma voz que
+                de uma banda, a força do coletivo. Mas havia algo dentro dele que pedia espaço, uma voz que
                 precisava de ser só sua.
               </p>
 
@@ -105,7 +105,7 @@ export default function BiographyPage() {
               </p>
 
               <p>
-                <em>Genesis</em> foi o princípio de tudo — um álbum que mapeia as origens, os medos, os sonhos.
+                <em>Genesis</em> foi o princípio de tudo, um álbum que mapeia as origens, os medos, os sonhos.
                 <em> 11:11</em> veio depois, às onze horas e onze minutos de um dia de novembro, como quem acredita
                 que há magia nos números e verdade nas coincidências.
               </p>
