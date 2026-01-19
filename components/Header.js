@@ -74,7 +74,7 @@ export default function Header() {
 
             {/* Account */}
             <Link
-              href="/admin"
+              href="/profile"
               className="p-2 text-[rgb(245,245,245)] hover:opacity-70 transition-opacity"
               aria-label="Conta"
             >
