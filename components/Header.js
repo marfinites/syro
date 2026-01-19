@@ -12,12 +12,25 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-[rgb(18,18,18)]">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
-          {/* Search Icon - Left */}
-          <div className="flex items-center">
+      <div className="px-6 md:px-10">
+        <div className="flex items-center justify-between h-32">
+          {/* Logo - Left */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/syrologo.avif"
+              alt="Syro Merchandise"
+              width={300}
+              height={154}
+              className="w-auto h-[120px]"
+              priority
+            />
+          </Link>
+
+          {/* Right Icons */}
+          <div className="flex items-center gap-2">
+            {/* Search */}
             {searchOpen ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mr-2">
                 <input
                   type="text"
                   placeholder="Pesquisar"
@@ -47,22 +60,7 @@ export default function Header() {
                 </svg>
               </button>
             )}
-          </div>
 
-          {/* Logo - Center */}
-          <Link href="/" className="absolute left-1/2 transform -translate-x-1/2">
-            <Image
-              src="/images/syrologo.avif"
-              alt="Syro Merchandise"
-              width={300}
-              height={154}
-              className="w-auto h-[80px]"
-              priority
-            />
-          </Link>
-
-          {/* Right Icons */}
-          <div className="flex items-center gap-1">
             {/* Account */}
             <Link
               href="/admin"

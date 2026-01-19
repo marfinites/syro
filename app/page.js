@@ -9,12 +9,12 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#121212]">
+      <main className="min-h-screen bg-[rgb(18,18,18)]">
         {/* Products Section - Direct grid like Shopify */}
-        <section className="py-8 px-4">
-          <div className="max-w-6xl mx-auto">
+        <section className="pt-16 pb-8 px-6 md:px-10">
+          <div className="max-w-7xl mx-auto">
             {/* Products Grid - 4 columns */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
