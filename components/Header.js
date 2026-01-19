@@ -15,16 +15,27 @@ export default function Header() {
       <div className="px-6 md:px-10">
         <div className="flex items-center justify-between h-32">
           {/* Logo - Left */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/images/syrologo.avif"
-              alt="Syro Merchandise"
-              width={300}
-              height={154}
-              className="w-auto h-[120px]"
-              priority
-            />
-          </Link>
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/syrologo.avif"
+                alt="Syro Merchandise"
+                width={300}
+                height={154}
+                className="w-auto h-[120px]"
+                priority
+              />
+            </Link>
+            {/* Navigation */}
+            <nav className="hidden md:flex items-center gap-6">
+              <Link
+                href="/biography"
+                className="text-[rgba(245,245,245,0.7)] hover:text-[rgb(245,245,245)] text-sm transition-colors"
+              >
+                Biografia
+              </Link>
+            </nav>
+          </div>
 
           {/* Right Icons */}
           <div className="flex items-center gap-2">
