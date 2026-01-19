@@ -41,7 +41,7 @@ export default function ProductPage() {
         <main className="min-h-screen pt-12 px-4 bg-[rgb(18,18,18)]">
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-xl text-[rgb(245,245,245)] mb-4">Produto não encontrado</h1>
-            <Link href="/" className="text-[rgb(252,228,119)] hover:underline text-sm">
+            <Link href="/" className="text-[rgb(245,245,245)] hover:opacity-70 text-sm transition-opacity">
               Voltar à loja
             </Link>
           </div>
@@ -156,8 +156,8 @@ export default function ProductPage() {
                             setSelectedSize(size)
                             setSizeDropdownOpen(false)
                           }}
-                          className={`w-full text-left px-4 py-3 text-sm hover:bg-[rgba(245,245,245,0.05)] transition-colors ${
-                            selectedSize === size ? 'text-[rgb(252,228,119)]' : 'text-[rgb(245,245,245)]'
+                          className={`w-full text-left px-4 py-3 text-sm hover:bg-[rgba(245,245,245,0.1)] transition-colors ${
+                            selectedSize === size ? 'bg-[rgba(245,245,245,0.1)] text-[rgb(245,245,245)]' : 'text-[rgba(245,245,245,0.7)]'
                           }`}
                         >
                           {size}
@@ -191,8 +191,8 @@ export default function ProductPage() {
                             setColorDropdownOpen(false)
                             setCurrentImageIndex(0)
                           }}
-                          className={`w-full text-left px-4 py-3 text-sm hover:bg-[rgba(245,245,245,0.05)] transition-colors ${
-                            selectedColor === color ? 'text-[rgb(252,228,119)]' : 'text-[rgb(245,245,245)]'
+                          className={`w-full text-left px-4 py-3 text-sm hover:bg-[rgba(245,245,245,0.1)] transition-colors ${
+                            selectedColor === color ? 'bg-[rgba(245,245,245,0.1)] text-[rgb(245,245,245)]' : 'text-[rgba(245,245,245,0.7)]'
                           }`}
                         >
                           {color}
@@ -227,7 +227,7 @@ export default function ProductPage() {
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="w-full py-4 bg-[rgb(252,228,119)] text-[rgb(18,18,18)] font-semibold text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
+                className="w-full py-4 bg-[rgb(245,245,245)] text-[rgb(18,18,18)] font-medium text-sm rounded-xl hover:opacity-90 transition-opacity"
               >
                 Adicionar ao carrinho
               </button>

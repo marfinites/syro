@@ -10,17 +10,16 @@
   --color-foreground: 245, 245, 245;
   --color-background-contrast: 146, 146, 146;
   --color-shadow: 18, 18, 18;
-  --color-button: 252, 228, 119;
-  --color-button-text: 245, 245, 245;
-  --color-secondary-button: 18, 18, 18;
+  --color-button: 245, 245, 245;
+  --color-button-text: 18, 18, 18;
+  --color-secondary-button: 26, 26, 26;
   --color-secondary-button-text: 245, 245, 245;
   --color-link: 245, 245, 245;
-  --color-badge-foreground: 245, 245, 245;
-  --color-badge-background: 18, 18, 18;
+  --color-badge-foreground: 18, 18, 18;
+  --color-badge-background: 245, 245, 245;
   --color-badge-border: 245, 245, 245;
   --payment-terms-background-color: rgb(18, 18, 18);
   --product-card-corner-radius: 1.6rem;
-  --gold: #fce477;
 }
 
 * {
@@ -79,10 +78,10 @@ body {
   position: fixed;
   bottom: 80px;
   right: 20px;
-  background: rgb(var(--color-button));
+  background: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
   padding: 12px 20px;
-  border-radius: 4px;
+  border-radius: 12px;
   font-weight: 500;
   font-size: 14px;
   animation: slideIn 0.3s ease;
@@ -100,20 +99,18 @@ body {
   }
 }
 
-/* Button Gold */
-.btn-gold {
-  background: rgb(var(--color-button));
+/* Button Primary */
+.btn-primary {
+  background: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 2px;
-  font-size: 12px;
-  letter-spacing: 0.5px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
   transition: all 0.2s ease;
-  text-transform: uppercase;
 }
 
-.btn-gold:hover {
+.btn-primary:hover {
   opacity: 0.9;
 }
 
@@ -129,7 +126,7 @@ body {
 
 .input-dark:focus {
   outline: none;
-  border-color: rgb(var(--color-button));
+  border-color: rgba(var(--color-foreground), 0.5);
 }
 
 /* Cart Badge */
@@ -161,6 +158,6 @@ body {
 }
 
 .admin-link:hover, .admin-link.active {
-  background: rgba(var(--color-foreground), 0.05);
-  color: rgb(var(--color-button));
+  background: rgba(var(--color-foreground), 0.1);
+  color: rgb(var(--color-foreground));
 }
