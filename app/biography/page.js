@@ -23,23 +23,23 @@ export default function BiographyPage() {
 
       <main className="min-h-screen bg-[rgb(18,18,18)]">
         {/* Hero Section */}
-        <section className="relative h-[70vh] flex items-end">
+        <section className="relative h-[70vh] flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgb(18,18,18)]" />
-          <div className="absolute inset-0 bg-[rgb(18,18,18)]/40" />
+          <div className="absolute inset-0 bg-[rgb(18,18,18)]/50" />
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(https://syro-merch.pt/cdn/shop/files/543001291_18532312672024887_4129404704821775462_n.png?v=1760021364)',
             }}
           />
-          <div className="relative z-10 w-full px-6 md:px-10 pb-16">
+          <div className="relative z-10 text-center px-6">
             <h1
               className="text-[rgb(245,245,245)] font-bold tracking-tight"
-              style={{ fontSize: 'clamp(48px, 12vw, 120px)', lineHeight: '0.9' }}
+              style={{ fontSize: 'clamp(60px, 15vw, 140px)', lineHeight: '0.9' }}
             >
               SYRO
             </h1>
-            <p className="text-[rgba(245,245,245,0.7)] text-lg md:text-xl mt-4 max-w-xl">
+            <p className="text-[rgba(245,245,245,0.7)] text-lg md:text-xl mt-6">
               Diogo Lopes · Barreiro, Portugal
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function BiographyPage() {
 
         {/* Biography Section */}
         <section className="px-6 md:px-10 py-20">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl mx-auto text-center">
             {/* Quote */}
             <blockquote className="mb-16">
               <p
@@ -90,7 +90,7 @@ export default function BiographyPage() {
 
               <p>
                 <em>Genesis</em> foi o princípio de tudo — um álbum que mapeia as origens, os medos, os sonhos.
-                <em>11:11</em> veio depois, às onze horas e onze minutos de um dia de novembro, como quem acredita
+                <em> 11:11</em> veio depois, às onze horas e onze minutos de um dia de novembro, como quem acredita
                 que há magia nos números e verdade nas coincidências. Vinte e duas faixas de quem não tem pressa,
                 de quem sabe que a arte não se mede em segundos de streaming.
               </p>
@@ -106,25 +106,25 @@ export default function BiographyPage() {
                 do Barreiro com baquetas nas mãos, é agora uma das vozes mais autênticas da música portuguesa.
               </p>
 
-              <p className="text-[rgb(252,228,119)] font-medium">
-                Porque a música, para ele, nunca foi sobre fama. Foi sempre sobre sentir.
-                E fazer sentir.
+              <p className="text-[rgb(252,228,119)] font-medium text-xl mt-12">
+                Porque a música, para ele, nunca foi sobre fama.<br />
+                Foi sempre sobre sentir. E fazer sentir.
               </p>
             </div>
           </div>
         </section>
 
         {/* Spotify Player Section */}
-        <section className="px-6 md:px-10 py-16 bg-[rgb(24,24,24)]">
-          <div className="max-w-4xl">
-            <h2 className="text-[rgb(245,245,245)] text-2xl font-medium mb-8">Ouve SYRO</h2>
+        <section className="px-6 md:px-10 py-20 bg-[rgb(24,24,24)]">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-[rgb(245,245,245)] text-3xl font-medium mb-10">Ouve SYRO</h2>
 
             {/* Spotify Embed */}
             <div className="rounded-xl overflow-hidden">
               <iframe
                 src="https://open.spotify.com/embed/artist/55axQKUUXr8LoUcKagMp5x?utm_source=generator&theme=0"
                 width="100%"
-                height="352"
+                height="400"
                 frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
@@ -140,9 +140,9 @@ export default function BiographyPage() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <div className="bg-[rgb(32,32,32)] p-4 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
+                <div className="bg-[rgb(32,32,32)] p-5 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
                   <p className="text-[rgb(245,245,245)] font-medium text-sm group-hover:text-[rgb(252,228,119)] transition-colors">Brutos Diamantes</p>
-                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">12.6M plays</p>
+                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-2">12.6M plays</p>
                 </div>
               </a>
               <a
@@ -151,9 +151,9 @@ export default function BiographyPage() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <div className="bg-[rgb(32,32,32)] p-4 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
+                <div className="bg-[rgb(32,32,32)] p-5 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
                   <p className="text-[rgb(245,245,245)] font-medium text-sm group-hover:text-[rgb(252,228,119)] transition-colors">Perto de Mim</p>
-                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">10.3M plays</p>
+                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-2">10.3M plays</p>
                 </div>
               </a>
               <a
@@ -162,9 +162,9 @@ export default function BiographyPage() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <div className="bg-[rgb(32,32,32)] p-4 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
+                <div className="bg-[rgb(32,32,32)] p-5 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
                   <p className="text-[rgb(245,245,245)] font-medium text-sm group-hover:text-[rgb(252,228,119)] transition-colors">Acordar</p>
-                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">6.1M plays</p>
+                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-2">6.1M plays</p>
                 </div>
               </a>
               <a
@@ -173,9 +173,9 @@ export default function BiographyPage() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <div className="bg-[rgb(32,32,32)] p-4 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
+                <div className="bg-[rgb(32,32,32)] p-5 rounded-lg hover:bg-[rgb(40,40,40)] transition-colors">
                   <p className="text-[rgb(245,245,245)] font-medium text-sm group-hover:text-[rgb(252,228,119)] transition-colors">Castelo de Cartas</p>
-                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-1">1.5M plays</p>
+                  <p className="text-[rgba(245,245,245,0.5)] text-xs mt-2">1.5M plays</p>
                 </div>
               </a>
             </div>
@@ -184,42 +184,28 @@ export default function BiographyPage() {
 
         {/* Timeline Section */}
         <section className="px-6 md:px-10 py-20">
-          <div className="max-w-4xl">
-            <h2 className="text-[rgb(245,245,245)] text-2xl font-medium mb-12">A Jornada</h2>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-[rgb(245,245,245)] text-3xl font-medium mb-16">A Jornada</h2>
 
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-[rgba(245,245,245,0.1)] transform md:-translate-x-1/2" />
-
-              {/* Timeline items */}
-              <div className="space-y-12">
-                {milestones.map((milestone, index) => (
-                  <div
-                    key={milestone.year}
-                    className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                  >
-                    {/* Content */}
-                    <div className={`md:w-1/2 pl-8 md:pl-0 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12 md:text-right'}`}>
-                      <span className="text-[rgb(252,228,119)] text-sm font-medium">{milestone.year}</span>
-                      <h3 className="text-[rgb(245,245,245)] text-lg font-medium mt-1">{milestone.title}</h3>
-                      <p className="text-[rgba(245,245,245,0.6)] text-sm mt-2">{milestone.description}</p>
-                    </div>
-
-                    {/* Dot */}
-                    <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-[rgb(252,228,119)] rounded-full transform -translate-x-1/2 md:-translate-x-1/2" />
-                  </div>
-                ))}
-              </div>
+            {/* Timeline - Horizontal on desktop, vertical on mobile */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {milestones.map((milestone) => (
+                <div key={milestone.year} className="text-center">
+                  <span className="text-[rgb(252,228,119)] text-2xl font-bold">{milestone.year}</span>
+                  <h3 className="text-[rgb(245,245,245)] text-base font-medium mt-2">{milestone.title}</h3>
+                  <p className="text-[rgba(245,245,245,0.5)] text-sm mt-2 leading-relaxed">{milestone.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Social Links Section */}
-        <section className="px-6 md:px-10 py-16 bg-[rgb(24,24,24)]">
-          <div className="max-w-4xl">
-            <h2 className="text-[rgb(245,245,245)] text-2xl font-medium mb-8">Segue SYRO</h2>
+        <section className="px-6 md:px-10 py-20 bg-[rgb(24,24,24)]">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-[rgb(245,245,245)] text-3xl font-medium mb-10">Segue SYRO</h2>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://open.spotify.com/artist/55axQKUUXr8LoUcKagMp5x"
                 target="_blank"
@@ -272,14 +258,14 @@ export default function BiographyPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="px-6 md:px-10 py-20 text-center">
-          <h2 className="text-[rgb(245,245,245)] text-3xl font-medium mb-4">Veste o Estilo</h2>
-          <p className="text-[rgba(245,245,245,0.6)] mb-8 max-w-md mx-auto">
+        <section className="px-6 md:px-10 py-24 text-center">
+          <h2 className="text-[rgb(245,245,245)] text-4xl font-medium mb-4">Veste o Estilo</h2>
+          <p className="text-[rgba(245,245,245,0.6)] mb-10 max-w-md mx-auto text-lg">
             Explora a coleção oficial de merch SYRO e apoia a música portuguesa.
           </p>
           <Link
             href="/"
-            className="inline-block bg-[rgb(252,228,119)] text-[rgb(18,18,18)] font-semibold px-8 py-4 text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
+            className="inline-block bg-[rgb(252,228,119)] text-[rgb(18,18,18)] font-semibold px-10 py-4 text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
           >
             Ver Coleção
           </Link>
