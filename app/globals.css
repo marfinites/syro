@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/P-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-background: 18, 18, 18;
   --gradient-background: #121212;
@@ -27,12 +35,14 @@
 }
 
 html {
+  font-family: 'CustomFont', sans-serif;
   font-weight: 400;
 }
 
 body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
+  font-family: 'CustomFont', sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
