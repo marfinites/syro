@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
-
 :root {
   --color-background: 18, 18, 18;
   --gradient-background: #121212;
@@ -29,14 +27,14 @@
 }
 
 html {
-  font-family: 'Major Mono Display', monospace;
+  font-family: var(--font-custom), sans-serif;
   font-weight: 400;
 }
 
 body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
-  font-family: 'Major Mono Display', monospace;
+  font-family: var(--font-custom), sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
