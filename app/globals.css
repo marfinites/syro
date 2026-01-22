@@ -27,14 +27,12 @@
 }
 
 html {
-  font-family: var(--font-custom), sans-serif;
   font-weight: 400;
 }
 
 body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
-  font-family: var(--font-custom), sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
